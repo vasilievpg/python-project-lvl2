@@ -3,4 +3,5 @@
 /.vscode/
 **/__pycache__
 /dist/
+/.pytest_cache/
 setup.cfg
