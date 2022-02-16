@@ -1,6 +1,13 @@
 #!/usr/bin/env python
 
 import argparse
+import json
+
+
+def generate_diff(file_path1, file_path2):
+    with json.load(open(file_path1)) as file1:
+        with json.load(open(file_path2)) as file2:
+            return file_path1, file_path2
 
 
 def main():
