@@ -4,6 +4,9 @@ install:
 gendiff:
 	poetry run gendiff
 
+gendiff_files:
+	poetry run gendiff ./tests/fixtures/file1.json ./tests/fixtures/file2.json
+
 build:
 	poetry build
 
@@ -21,3 +24,6 @@ package-uninstall:
 
 package-reinstall:
 	python3 -m pip install --user dist/hexlet_code-0.1.0-py3-none-any.whl --force-reinstall --no-warn-script-location
+
+test:
+	poetry run pytest -svv
