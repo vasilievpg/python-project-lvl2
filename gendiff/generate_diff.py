@@ -25,18 +25,18 @@ def generate_diff(file_path1, file_path2):
     diff_dict = {}
     for key in sorted(keys):
         if key not in data1:
-            diff_dict['+ {}'.format(key)] = replace_capital(data2[key])
+            diff_dict[f'+ {key}'] = replace_capital(data2[key])
         elif key not in data2:
-            diff_dict['- {}'.format(key)] = replace_capital(data1[key])
+            diff_dict[f'- {key}'] = replace_capital(data1[key])
         elif data1[key] == data2[key]:
-            diff_dict['  {}'.format(key)] = replace_capital(data1[key])
+            diff_dict[f'  {key}'] = replace_capital(data1[key])
         else:
-            diff_dict['- {}'.format(key)] = replace_capital(data1[key])
-            diff_dict['+ {}'.format(key)] = replace_capital(data2[key])
-    diff_list = []
+            diff_dict[f'- {key}'] = replace_capital(data1[key])
+            diff_dict[f'+ {key}'] = replace_capital(data2[key])
+    diff_list = ['{']
     for key, value in diff_dict.items():
-        diff_list.append('  {}: {}'.format(key, value))
-    diff_list = ['{'] + diff_list + ['}']
+        diff_list.append(f'  {key}: {value}')
+    diff_list.append('}')
     return '\n'.join(diff_list)
 
 
