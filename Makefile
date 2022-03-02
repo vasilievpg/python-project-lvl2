@@ -7,7 +7,7 @@ gendiff:
 gendiff_files:
 	poetry run gendiff ./tests/fixtures/file1.json ./tests/fixtures/file2.json
 
-build:
+build: check
 	poetry build
 
 lint:
@@ -29,4 +29,11 @@ test:
 	poetry run pytest -svv
 
 test-coverage:
-	poetry run pytest --cov=gendiff
+	poetry run pytest --cov=gendiff --cov-report xml
+
+selfcheck:
+	poetry check
+
+check: selfcheck test lint
+
+.PHONY: install test lint selfcheck check build
