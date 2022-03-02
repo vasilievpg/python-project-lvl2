@@ -27,3 +27,6 @@ package-reinstall:
 
 test:
 	poetry run pytest -svv
+
+test-coverage:
+	poetry run pytest --cov=gendiff
