@@ -1,16 +1,10 @@
 #!/usr/bin/env python
 
 import argparse
-import json
+from gendiff.parse_file import open_file
 
 
-def open_file(file_path):
-    with open(file_path) as file:
-        data = json.load(file)
-        return data
-
-
-def replace_capital(word):
+def replace_bool_cap(word):
     if word is True:
         return 'true'
     if word is False:
@@ -25,14 +19,14 @@ def generate_diff(file_path1, file_path2):
     diff_dict = {}
     for key in sorted(keys):
         if key not in data1:
-            diff_dict[f'+ {key}'] = replace_capital(data2[key])
+            diff_dict[f'+ {key}'] = replace_bool_cap(data2[key])
         elif key not in data2:
-            diff_dict[f'- {key}'] = replace_capital(data1[key])
+            diff_dict[f'- {key}'] = replace_bool_cap(data1[key])
         elif data1[key] == data2[key]:
-            diff_dict[f'  {key}'] = replace_capital(data1[key])
+            diff_dict[f'  {key}'] = replace_bool_cap(data1[key])
         else:
-            diff_dict[f'- {key}'] = replace_capital(data1[key])
-            diff_dict[f'+ {key}'] = replace_capital(data2[key])
+            diff_dict[f'- {key}'] = replace_bool_cap(data1[key])
+            diff_dict[f'+ {key}'] = replace_bool_cap(data2[key])
     diff_list = ['{']
     for key, value in diff_dict.items():
         diff_list.append(f'  {key}: {value}')
