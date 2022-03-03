@@ -4,8 +4,11 @@ install:
 gendiff:
 	poetry run gendiff
 
-gendiff_files:
+gendiff_files_json:
 	poetry run gendiff ./tests/fixtures/file1.json ./tests/fixtures/file2.json
+
+gendiff_files_yaml:
+	poetry run gendiff ./tests/fixtures/file1.yaml ./tests/fixtures/file2.yml
 
 build: check
 	poetry build
