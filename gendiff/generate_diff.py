@@ -2,36 +2,14 @@
 
 import argparse
 from gendiff.parse_file import open_file
-
-
-def replace_bool_cap(word):
-    if word is True:
-        return 'true'
-    if word is False:
-        return 'false'
-    return word
+from gendiff.diff_constructor import construct_diff
 
 
 def generate_diff(file_path1, file_path2):
     data1 = open_file(file_path1)
     data2 = open_file(file_path2)
-    keys = data1.keys() | data2.keys()
-    diff_dict = {}
-    for key in sorted(keys):
-        if key not in data1:
-            diff_dict[f'+ {key}'] = replace_bool_cap(data2[key])
-        elif key not in data2:
-            diff_dict[f'- {key}'] = replace_bool_cap(data1[key])
-        elif data1[key] == data2[key]:
-            diff_dict[f'  {key}'] = replace_bool_cap(data1[key])
-        else:
-            diff_dict[f'- {key}'] = replace_bool_cap(data1[key])
-            diff_dict[f'+ {key}'] = replace_bool_cap(data2[key])
-    diff_list = ['{']
-    for key, value in diff_dict.items():
-        diff_list.append(f'  {key}: {value}')
-    diff_list.append('}')
-    return '\n'.join(diff_list)
+    result = construct_diff(data1, data2)
+    return result
 
 
 def main():
